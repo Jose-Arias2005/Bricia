@@ -1,0 +1,102 @@
+<section id="nosotros" class="py-24 bg-[#ffc24c] relative overflow-hidden">
+  
+  <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_white_1px,_transparent_1px)] bg-[size:24px_24px]"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+      
+      <div class="md:w-1/2">
+        <span class="inline-block py-1 px-3 rounded-full bg-white text-[#10367D] text-xs font-bold tracking-widest uppercase mb-6 shadow-sm">
+          / Nuestra Historia
+        </span>
+        
+        <h2 class="text-4xl md:text-5xl font-bold text-[#10367D] mb-6 leading-tight font-outfit">
+          Un Legado de <br />
+          <span class="text-[#10367D] drop-shadow-sm">Servicio y Confianza</span>
+        </h2>
+        
+        <p class="text-lg text-slate-900 mb-6 leading-relaxed font-light font-outfit">
+          Desde hace más de una década, <strong class="text-[#10367D]">Transportes Bricia</strong> ha sido el motor que abastece el desarrollo de Lima. Lo que comenzó como un compromiso familiar, hoy es una operación logística líder.
+        </p>
+        
+        <p class="text-lg text-slate-900 mb-8 leading-relaxed font-light font-outfit">
+          No solo transportamos agua; llevamos tranquilidad a obras y hogares, respaldados por una flota moderna y una historia de cumplimiento intachable.
+        </p>
+        
+        <div class="grid grid-cols-3 gap-6 border-t border-[#ffc24c]/20 pt-8" id="stats-container">
+          
+          <div class="text-center md:text-left">
+            <div class="flex items-baseline justify-center md:justify-start">
+              <span class="text-3xl font-bold text-[#10367D] mr-1">+</span>
+              <span class="text-5xl md:text-6xl font-black text-[#10367D] font-outfit counter" data-target="15">0</span>
+            </div>
+            <p class="text-[10px] font-bold text-[#10367D]/80 uppercase tracking-widest mt-1">Años Exp.</p>
+          </div>
+
+          <div class="text-center md:text-left">
+            <div class="flex items-baseline justify-center md:justify-start">
+              <span class="text-5xl md:text-6xl font-black text-[#10367D] font-outfit counter" data-target="24">0</span>
+              <span class="text-3xl font-bold text-[#10367D]">/7</span>
+            </div>
+            <p class="text-[10px] font-bold text-[#10367D]/80 uppercase tracking-widest mt-1">Operativos</p>
+          </div>
+
+          <div class="text-center md:text-left">
+            <div class="flex items-baseline justify-center md:justify-start">
+              <span class="text-5xl md:text-6xl font-black text-[#10367D] font-outfit counter" data-target="100">0</span>
+              <span class="text-3xl font-bold text-[#10367D]">%</span>
+            </div>
+            <p class="text-[10px] font-bold text-[#10367D]/80 uppercase tracking-widest mt-1">Garantía</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="md:w-1/2 w-full relative">
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500 border-8 border-white">
+          
+          <img 
+            src="/cisterna.jpg" 
+            alt="Historia de Transportes Bricia" 
+            class="w-full h-[500px] object-cover"
+          />
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const animateValue = (obj, start, end, duration) => {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      obj.innerHTML = Math.floor(progress * (end - start) + start);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const counters = entry.target.querySelectorAll('.counter');
+        counters.forEach((counter) => {
+          const target = parseInt(counter.getAttribute('data-target'));
+          animateValue(counter, 0, target, 2000);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const statsSection = document.getElementById('stats-container');
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+</script>

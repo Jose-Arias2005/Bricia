@@ -1,0 +1,145 @@
+---
+const navItems = [
+  { name: "INICIO", url: "/#inicio" },
+  { name: "NOSOTROS", url: "/#nosotros" },
+  { name: "SERVICIOS", url: "/#servicios" },
+  { name: "CERTIFICACIONES", url: "/#certificaciones" },
+  { name: "GALERÍA", url: "/#galeria" },
+];
+---
+
+<header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 py-8">
+  <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      
+      <a href="/" class="flex items-center gap-3 group">
+        <div id="logo-icon" class="opacity-0 -translate-x-4 transition-all duration-500 text-2xl">🚛</div>
+        
+        <div class="flex flex-col">
+          <span id="logo-text" class="text-4xl md:text-5xl font-bold text-white leading-none tracking-tight transition-all duration-500 whitespace-nowrap">
+            TRANSPORTES BRICIA
+          </span>
+          <span id="logo-sub" class="text-sm text-sky-300 font-bold tracking-[0.3em] uppercase opacity-100 transition-all duration-500">
+            LIMA & CALLAO
+          </span>
+        </div>
+      </a>
+
+      <div id="nav-content" class="flex items-center gap-8 opacity-0 translate-y-[-20px] transition-all duration-500 pointer-events-none">
+        
+        <!-- Menú de Navegación (Relativo para contener el marcador) -->
+        <nav class="hidden md:flex space-x-8 relative">
+          
+          {navItems.map((item) => (
+            <a 
+              href={item.url} 
+              class="nav-link relative z-10 text-slate-600 hover:text-[#10367D] font-bold text-sm tracking-wide transition-colors py-2 px-1"
+              data-target={item.url.replace('/#', '')}
+            >
+              {item.name}
+            </a>
+          ))}
+          
+          <!-- Marcador Deslizante -->
+          <div id="menu-marker" class="absolute bottom-0 h-1 bg-[#38BDF8] rounded-full transition-all duration-300 ease-out opacity-0 pointer-events-none"></div>
+
+        </nav>
+
+        <div class="hidden md:flex">
+          <a 
+            href="tel:+51963751896" 
+            class="bg-[#10367D] hover:bg-[#0d2e6a] text-white px-6 py-2.5 rounded font-bold transition shadow-lg flex items-center gap-2 text-sm"
+          >
+            <span>📞 963 751 896</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const logoText = document.getElementById('logo-text');
+  const logoSub = document.getElementById('logo-sub');
+  const logoIcon = document.getElementById('logo-icon');
+  const navContent = document.getElementById('nav-content');
+  
+  const marker = document.getElementById('menu-marker');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function moveMarker(link) {
+    if (!marker || !link) return;
+    
+    const left = link.offsetLeft;
+    const width = link.offsetWidth;
+
+    marker.style.left = `${left}px`;
+    marker.style.width = `${width}px`;
+    marker.style.opacity = '1';
+    
+    navLinks.forEach(l => l.classList.remove('text-[#38BDF8]'));
+    link.classList.add('text-[#38BDF8]');
+  }
+
+  // LOGICA DE SCROLL (Estilos del Navbar)
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar.classList.remove('py-8', 'bg-transparent');
+      navbar.classList.add('py-2', 'bg-white', 'shadow-md');
+      logoText.classList.remove('text-4xl', 'md:text-5xl', 'text-white');
+      logoText.classList.add('text-xl', 'text-[#10367D]');
+      logoSub.classList.add('text-[10px]', 'text-slate-500');
+      logoSub.classList.remove('text-sm', 'text-sky-300');
+      logoIcon.classList.remove('opacity-0', '-translate-x-4');
+      navContent.classList.remove('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
+    } else {
+      navbar.classList.add('py-8', 'bg-transparent');
+      navbar.classList.remove('py-2', 'bg-white', 'shadow-md');
+      logoText.classList.add('text-4xl', 'md:text-5xl', 'text-white');
+      logoText.classList.remove('text-xl', 'text-[#10367D]');
+      logoSub.classList.remove('text-[10px]', 'text-slate-500');
+      logoSub.classList.add('text-sm', 'text-sky-300');
+      logoIcon.classList.add('opacity-0', '-translate-x-4');
+      navContent.classList.add('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
+    }
+  });
+
+  // LOGICA DE DETECCIÓN DE SECCIÓN (CORREGIDA)
+  const sections = document.querySelectorAll('section[id]');
+  
+  // CAMBIO IMPORTANTE:
+  // Usamos rootMargin para crear una línea de detección en el centro exacto de la pantalla.
+  // '-50% 0px -50% 0px' ignora la mitad superior e inferior, dejando solo una línea central.
+  const observerOptions = {
+    root: null,
+    rootMargin: '-50% 0px -50% 0px', 
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const currentId = entry.target.getAttribute('id');
+        const activeLink = document.querySelector(`.nav-link[data-target="${currentId}"]`);
+        
+        if (activeLink) {
+          moveMarker(activeLink);
+        }
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+  
+  // Fallback para cuando estamos muy arriba (asegura que Inicio se marque al cargar)
+  window.addEventListener('scroll', () => {
+      if (window.scrollY < 50) {
+          const homeLink = document.querySelector('.nav-link[data-target="inicio"]');
+          if (homeLink) moveMarker(homeLink);
+      }
+  });
+</script>

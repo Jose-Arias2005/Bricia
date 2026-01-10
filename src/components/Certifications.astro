@@ -1,0 +1,25 @@
+<section id="certificaciones" class="py-20 bg-[#10367D] text-white">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    
+    <h2 class="text-3xl font-bold mb-12 flex items-center justify-center gap-4">
+      <span class="w-12 h-1 bg-[#38BDF8] rounded-full"></span>
+      Documentación y Garantía
+      <span class="w-12 h-1 bg-[#38BDF8] rounded-full"></span>
+    </h2>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {[
+        { t: "SEDAPAL", s: "Autorizado", i: "💧" },
+        { t: "DIGESA", s: "Registro Sanitario", i: "📋" },
+        { t: "SCTR", s: "Personal Asegurado", i: "🛡️" },
+        { t: "FACTURACIÓN", s: "Formalidad 100%", i: "🧾" }
+      ].map(c => (
+        <div class="p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition backdrop-blur-sm">
+          <div class="text-4xl mb-4">{c.i}</div>
+          <div class="font-bold text-lg">{c.t}</div>
+          <div class="text-xs text-[#38BDF8] uppercase tracking-widest mt-1">{c.s}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

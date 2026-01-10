@@ -1,0 +1,213 @@
+---
+const services = [
+  {
+    id: "01",
+    title: "Agua Potable Certificada",
+    desc: "Suministro vital para consumo humano y plantas de alimentos. Cumplimos con rigurosos estándares de calidad DIGESA y SEDAPAL.",
+    icon: "💧",
+    image: "/cisterna.jpg"
+  },
+  {
+    id: "02",
+    title: "Llenado de Piscinas",
+    desc: "Servicio especializado con bombeo de alta presión para clubes y residenciales. Optimizamos el tiempo cuidando su infraestructura.",
+    icon: "🌊",
+    image: "/cisterna.jpg"
+  },
+  {
+    id: "03",
+    title: "Riego y Compactación",
+    desc: "Cisternas con aspersión industrial para control de polvo en obras. Solución esencial para construcción y minería.",
+    icon: "🚜",
+    image: "/cisterna.jpg"
+  },
+  {
+    id: "04",
+    title: "Alquiler de Flota",
+    desc: "Unidades desde 5,000 galones. Contratos flexibles por día o mes, con conductores certificados y SCTR incluido.",
+    icon: "🚛",
+    image: "/cisterna.jpg"
+  }
+];
+---
+
+<section id="servicios" class="relative bg-[#EBEBEB]" style="height: 350vh;">
+  
+  <div class="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
+    
+    <!-- Título Flotante -->
+    <div class="absolute top-28 left-0 w-full z-40 text-center pointer-events-none">
+       <span class="text-[#38BDF8] font-bold tracking-[0.3em] text-sm uppercase bg-white/90 px-6 py-2 rounded-full backdrop-blur-md shadow-sm border border-white/50">
+         / Nuestros Servicios
+       </span>
+    </div>
+
+    <!-- Fondo Estático -->
+    <div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none">
+        <h2 class="text-[25vw] font-black text-[#38BDF8]/10 whitespace-nowrap select-none font-outfit tracking-tighter">
+            POTABLE
+        </h2>
+    </div>
+
+    <!-- Contenedor de Slides -->
+    <div class="relative w-full h-full z-10">
+      
+      {services.map((service, index) => (
+        <div 
+            class="service-slide absolute inset-0 w-full h-full flex items-center justify-center transition-all duration-1000 ease-in-out opacity-0 pointer-events-none translate-x-full"
+            data-index={index}
+        >
+            <div class="max-w-7xl w-full px-6 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-20 h-full">
+                
+                <!-- Lado Izquierdo: Texto -->
+                <div class="w-full md:w-1/2 flex flex-col justify-center items-start space-y-6 z-20">
+                    
+                    <div class="flex items-center gap-4">
+                        <span class="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#10367D] to-sky-400 opacity-20 font-outfit select-none">
+                            {service.id}
+                        </span>
+                        <div class="w-12 md:w-24 h-1 bg-[#38BDF8]"></div>
+                    </div>
+                    
+                    <h3 class="text-4xl md:text-6xl lg:text-7xl font-bold text-[#10367D] leading-tight drop-shadow-sm">
+                        {service.title}
+                    </h3>
+                    
+                    <p class="text-lg md:text-xl text-slate-600 leading-relaxed font-light max-w-lg bg-white/50 p-8 rounded-2xl backdrop-blur-sm border border-white/60 shadow-lg">
+                        {service.desc}
+                    </p>
+
+                    <div class="flex items-center gap-3 text-[#10367D] font-bold uppercase tracking-widest text-sm mt-4 bg-white py-4 px-8 rounded-full shadow-lg border border-[#10367D]/5 hover:scale-105 transition-transform cursor-pointer group">
+                        <span class="text-2xl group-hover:rotate-12 transition-transform">{service.icon}</span>
+                        <span>Más Información</span>
+                    </div>
+                </div>
+
+                <!-- Lado Derecho: Imagen -->
+                <div class="w-full md:w-1/2 h-[40vh] md:h-[600px] relative group flex items-center justify-center">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-tr from-[#38BDF8] to-[#10367D] rounded-[3rem] transform rotate-3 scale-95 opacity-20 blur-md transition-transform duration-700 group-hover:rotate-6"></div>
+                    
+                    <div class="relative w-full h-full rounded-[3rem] overflow-hidden shadow-2xl border-[8px] border-white z-10 transform transition-transform duration-700 hover:scale-[1.02]">
+                        <img 
+                            src={service.image} 
+                            alt={service.title} 
+                            class="w-full h-full object-cover"
+                        />
+                        <div class="absolute inset-0 bg-[#10367D]/10 mix-blend-multiply"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+      ))}
+      
+    </div>
+
+    <!-- Indicadores laterales -->
+    <div class="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-50">
+        {services.map((_, i) => (
+            /* AGREGADO: Clase 'nav-dot-btn' y data-index para identificarlos en JS */
+            <div class="relative group cursor-pointer nav-dot-btn" data-index={i}>
+                 <div class="w-3 h-3 rounded-full border-2 border-[#10367D] transition-all duration-300 progress-dot group-hover:bg-[#10367D]/50"></div>
+                 <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[#10367D] font-bold text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                    0{i + 1}
+                 </span>
+            </div>
+        ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const section = document.getElementById('servicios');
+  const slides = document.querySelectorAll('.service-slide');
+  const dots = document.querySelectorAll('.progress-dot');
+  const navBtns = document.querySelectorAll('.nav-dot-btn'); // Seleccionamos los botones
+
+  // --- LÓGICA DE SCROLL AL HACER CLIC ---
+  navBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      // 1. Obtenemos el índice al que queremos ir (0, 1, 2, 3)
+      const targetIndex = parseInt(btn.getAttribute('data-index'));
+      
+      // 2. Calculamos datos de la sección y ventana
+      const rect = section.getBoundingClientRect();
+      const absoluteTop = window.scrollY + rect.top; // Posición absoluta del inicio de la sección en la página
+      const windowHeight = window.innerHeight;
+      const scrollableDistance = section.offsetHeight - windowHeight; // Cuánto se puede scrollear dentro
+      
+      // 3. Calculamos el % de progreso objetivo
+      // Ejemplo: Slide 0 es 0%, Slide 1 es 25%, Slide 2 es 50%...
+      const targetProgress = targetIndex / slides.length;
+      
+      // 4. Calculamos la posición final en píxeles
+      // Sumamos un pequeño buffer (+5px) para asegurar que entramos bien en el rango del slide
+      const targetScrollY = absoluteTop + (targetProgress * scrollableDistance) + 5;
+
+      // 5. Ejecutamos el scroll suave
+      window.scrollTo({
+        top: targetScrollY,
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  // --- LÓGICA DE ACTUALIZACIÓN VISUAL (EXISTENTE) ---
+  function updateScroll() {
+    if (!section) return;
+
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const scrollableDistance = rect.height - windowHeight;
+    
+    if (scrollableDistance <= 0) return;
+
+    let progress = -rect.top / scrollableDistance;
+    progress = Math.max(0, Math.min(progress, 1));
+
+    const totalSlides = slides.length;
+    let currentIndex = Math.floor(progress * totalSlides);
+    
+    if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+
+    slides.forEach((slide, index) => {
+        if (index === currentIndex) {
+            slide.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-full', '-translate-x-full', 'scale-95');
+            slide.classList.add('opacity-100', 'translate-x-0', 'scale-100', 'z-20');
+        } else if (index < currentIndex) {
+            slide.classList.remove('opacity-100', 'translate-x-0', 'translate-x-full', 'scale-100', 'z-20');
+            slide.classList.add('opacity-0', 'pointer-events-none', '-translate-x-full', 'scale-95', 'z-10');
+        } else {
+            slide.classList.remove('opacity-100', 'translate-x-0', '-translate-x-full', 'scale-100', 'z-20');
+            slide.classList.add('opacity-0', 'pointer-events-none', 'translate-x-full', 'scale-95', 'z-10');
+        }
+    });
+
+    dots.forEach((dot, index) => {
+        // Obtenemos el padre para saber si estamos haciendo hover o no (opcional, pero mantenemos el estilo limpio)
+        if (index === currentIndex) {
+            dot.classList.add('bg-[#38BDF8]', 'border-[#38BDF8]', 'scale-150');
+            dot.classList.remove('bg-transparent', 'border-[#10367D]');
+        } else {
+            dot.classList.add('bg-transparent', 'border-[#10367D]');
+            dot.classList.remove('bg-[#38BDF8]', 'border-[#38BDF8]', 'scale-150');
+        }
+    });
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  window.addEventListener('resize', updateScroll);
+  updateScroll();
+</script>
