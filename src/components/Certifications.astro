@@ -1,3 +1,21 @@
+---
+import { Image } from 'astro:assets';
+
+// 1. Importamos los archivos según el orden que pediste
+import iconSedapal from '../icons/iconos-02.svg';
+import iconDigesa from '../icons/iconos-03.svg';
+import iconSctr from '../icons/iconos-01.svg';
+import iconFactura from '../icons/iconos-04.svg';
+
+// 2. Creamos el array de objetos asignando la variable importada
+const certificaciones = [
+  { t: "SEDAPAL", s: "Autorizado", icon: iconSedapal },       // iconos-02
+  { t: "DIGESA", s: "Registro Sanitario", icon: iconDigesa }, // iconos-03
+  { t: "SCTR", s: "Personal Asegurado", icon: iconSctr },     // iconos-01
+  { t: "FACTURACIÓN", s: "Formalidad 100%", icon: iconFactura } // iconos-04
+];
+---
+
 <section id="certificaciones" class="py-20 bg-[#10367D] text-white">
   <div class="max-w-7xl mx-auto px-6 text-center">
     
@@ -8,14 +26,17 @@
     </h2>
     
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      {[
-        { t: "SEDAPAL", s: "Autorizado", i: "💧" },
-        { t: "DIGESA", s: "Registro Sanitario", i: "📋" },
-        { t: "SCTR", s: "Personal Asegurado", i: "🛡️" },
-        { t: "FACTURACIÓN", s: "Formalidad 100%", i: "🧾" }
-      ].map(c => (
-        <div class="p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition backdrop-blur-sm">
-          <div class="text-4xl mb-4">{c.i}</div>
+      {certificaciones.map(c => (
+        <div class="p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition backdrop-blur-sm flex flex-col items-center">
+          
+          <div class="mb-4">
+            <Image 
+              src={c.icon} 
+              alt={`Icono de ${c.t}`} 
+              class="w-16 h-16 object-contain" 
+            />
+          </div>
+          
           <div class="font-bold text-lg">{c.t}</div>
           <div class="text-xs text-[#38BDF8] uppercase tracking-widest mt-1">{c.s}</div>
         </div>

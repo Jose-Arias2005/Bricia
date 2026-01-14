@@ -1,5 +1,20 @@
 <section id="nosotros" class="py-24 bg-[#ffc24c] relative overflow-hidden">
   
+  <div class="absolute top-0 left-0 w-full overflow-hidden z-20 leading-[0] pointer-events-none">
+    <svg 
+        class="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[90px]" 
+        data-name="Layer 1" 
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 1200 120" 
+        preserveAspectRatio="none"
+    >
+        <path 
+            d="M0,0 V50 Q30,100 60,50 T120,50 T180,50 T240,50 T300,50 T360,50 T420,50 T480,50 T540,50 T600,50 T660,50 T720,50 T780,50 T840,50 T900,50 T960,50 T1020,50 T1080,50 T1140,50 T1200,50 V0 Z" 
+            fill="#10367D"
+        ></path>
+    </svg>
+  </div>
+
   <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_white_1px,_transparent_1px)] bg-[size:24px_24px]"></div>
 
   <div class="max-w-7xl mx-auto px-6 relative z-10">
@@ -16,11 +31,13 @@
         </h2>
         
         <p class="text-lg text-slate-900 mb-6 leading-relaxed font-light font-outfit">
-          Desde hace más de una década, <strong class="text-[#10367D]">Transportes Bricia</strong> ha sido el motor que abastece el desarrollo de Lima. Lo que comenzó como un compromiso familiar, hoy es una operación logística líder.
+          Desde hace más de una década, <strong class="text-[#10367D]">Transportes Bricia</strong> ha sido el motor que abastece el desarrollo de Lima.
+          Lo que comenzó como un compromiso familiar, hoy es una operación logística líder.
         </p>
         
         <p class="text-lg text-slate-900 mb-8 leading-relaxed font-light font-outfit">
-          No solo transportamos agua; llevamos tranquilidad a obras y hogares, respaldados por una flota moderna y una historia de cumplimiento intachable.
+          No solo transportamos agua;
+          llevamos tranquilidad a obras y hogares, respaldados por una flota moderna y una historia de cumplimiento intachable.
         </p>
         
         <div class="grid grid-cols-3 gap-6 border-t border-[#ffc24c]/20 pt-8" id="stats-container">
@@ -57,23 +74,24 @@
         </div>
       </div>
 
-      <div class="md:w-1/2 w-full relative">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500 ">
-          
-          <img 
-            src="/cisterna.jpg" 
-            alt="Historia de Transportes Bricia" 
-            class="w-full h-[500px] object-cover"
-          />
+        <div class="md:w-1/2 w-full relative">
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500 ">
+                  
+                  <img 
+                    src="/cisterna.jpg" 
+                    alt="Historia de Transportes Bricia" 
+                    class="w-full h-[500px] object-cover"
+                  />
 
-        </div>
-      </div>
+                </div>
+              </div>
 
     </div>
   </div>
 </section>
 
 <script>
+  // LÓGICA DE ANIMACIÓN DE NÚMEROS (CONTADORES)
   const animateValue = (obj, start, end, duration) => {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -87,7 +105,7 @@
     window.requestAnimationFrame(step);
   };
 
-  const observer = new IntersectionObserver((entries) => {
+  const observerCounters = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const counters = entry.target.querySelectorAll('.counter');
@@ -95,13 +113,13 @@
           const target = parseInt(counter.getAttribute('data-target'));
           animateValue(counter, 0, target, 2000);
         });
-        observer.unobserve(entry.target);
+        observerCounters.unobserve(entry.target);
       }
     });
   }, { threshold: 0.5 });
 
   const statsSection = document.getElementById('stats-container');
   if (statsSection) {
-    observer.observe(statsSection);
+    observerCounters.observe(statsSection);
   }
 </script>
