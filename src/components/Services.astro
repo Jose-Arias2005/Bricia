@@ -1,31 +1,44 @@
 ---
+import olaPattern from '../icons/ola.svg';
+
+// --- CONFIGURACIÓN DEL PATRÓN ---
+// Juega con estos números para moverlos a tu gusto:
+
+const iconSize = 90;      // Qué tan grande es la ola (en px)
+const spacingX = 100;      // Separación Horizontal (Eje X)
+const spacingY = 40;      // Separación Vertical (Eje Y) - MENOR número = Más pegados verticalmente
+const offsetX  = 0;       // Mover todo el patrón a la derecha
+const offsetY  = 0;       // Mover todo el patrón hacia abajo
+
+// -------------------------------
+
 const services = [
   {
     id: "01",
-    title: "Agua Potable Certificada",
+    title: "Agua potable de Calidad",
     desc: "Suministro vital para consumo humano y plantas de alimentos. Cumplimos con rigurosos estándares de calidad DIGESA y SEDAPAL.",
-    icon: "",
+    icon: "💧",
     image: "/cisterna.jpg"
   },
   {
     id: "02",
-    title: "Llenado de Piscinas",
+    title: "Laboratorios y Empresas",
     desc: "Servicio especializado con bombeo de alta presión para clubes y residenciales. Optimizamos el tiempo cuidando su infraestructura.",
-    icon: "",
+    icon: "🏭",
     image: "/cisterna.jpg"
   },
   {
     id: "03",
-    title: "Riego y Compactación",
+    title: "Universidades y Colegios",
     desc: "Cisternas con aspersión industrial para control de polvo en obras. Solución esencial para construcción y minería.",
-    icon: "",
+    icon: "🏫",
     image: "/cisterna.jpg"
   },
   {
     id: "04",
-    title: "Alquiler de Flota",
+    title: "Casas, Residencias y Piscinas",
     desc: "Unidades desde 5,000 galones. Contratos flexibles por día o mes, con conductores certificados y SCTR incluido.",
-    icon: "",
+    icon: "🏠",
     image: "/cisterna.jpg"
   }
 ];
@@ -41,12 +54,29 @@ const services = [
       </span>
     </div>
 
-    <div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none">
-        <h2 class="text-[25vw] font-black text-[#38BDF8]/10 whitespace-nowrap select-none font-outfit tracking-tighter">
-            POTABLE
-        </h2>
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-8">
+      <svg width="100%" height="100%">
+        <defs>
+          <pattern 
+            id="ola-grid" 
+            x={offsetX} 
+            y={offsetY} 
+            width={spacingX} 
+            height={spacingY} 
+            patternUnits="userSpaceOnUse"
+          >
+            <image 
+              href={olaPattern.src} 
+              x={(spacingX - iconSize) / 2} 
+              y={(spacingY - iconSize) / 2} 
+              width={iconSize} 
+              height={iconSize} 
+            />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#ola-grid)" />
+      </svg>
     </div>
-
     <div class="relative w-full h-full z-10">
       
       {services.map((service, index) => (
@@ -57,19 +87,15 @@ const services = [
             <div class="max-w-7xl w-full px-6 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-20 h-full">
                 
                 <div class="w-full md:w-1/2 flex flex-col justify-center items-start space-y-6 z-20">
-                    
                     <span class="text-6xl md:text-8xl font-black text-sky-400 font-outfit select-none leading-none">
                         {service.id}
                     </span>
-                    
                     <h3 class="text-4xl md:text-6xl lg:text-7xl font-bold text-[#10367D] leading-tight drop-shadow-sm">
                         {service.title}
                     </h3>
-                    
                     <p class="text-lg md:text-xl text-slate-600 leading-relaxed font-light max-w-lg bg-white/50 p-8 rounded-2xl backdrop-blur-sm border border-white/60 shadow-lg">
                         {service.desc}
                     </p>
-
                     <div class="flex items-center gap-3 text-white font-bold uppercase tracking-widest text-sm mt-4 bg-sky-400 py-4 px-8 rounded-full shadow-lg border border-sky-400 hover:scale-105 transition-transform cursor-pointer group">
                         <span class="text-2xl group-hover:rotate-12 transition-transform">{service.icon}</span>
                         <span>Más Información</span>
@@ -77,15 +103,9 @@ const services = [
                 </div>
 
                 <div class="w-full md:w-1/2 h-[40vh] md:h-[600px] relative group flex items-center justify-center">
-                    
                     <div class="absolute inset-0 bg-gradient-to-tr from-[#38BDF8] to-[#10367D] rounded-[3rem] transform rotate-3 scale-95 opacity-20 blur-md transition-transform duration-700 group-hover:rotate-6"></div>
-                    
                     <div class="relative w-full h-full rounded-[3rem] overflow-hidden shadow-2xl z-10 transform transition-transform duration-700 hover:scale-[1.02]">
-                        <img 
-                            src={service.image} 
-                            alt={service.title} 
-                            class="w-full h-full object-cover"
-                        />
+                        <img src={service.image} alt={service.title} class="w-full h-full object-cover" />
                         <div class="absolute inset-0 bg-[#10367D]/10 mix-blend-multiply"></div>
                     </div>
                 </div>
@@ -93,7 +113,6 @@ const services = [
             </div>
         </div>
       ))}
-      
     </div>
 
     <div class="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-50">
@@ -116,7 +135,6 @@ const services = [
   const dots = document.querySelectorAll('.progress-dot');
   const navBtns = document.querySelectorAll('.nav-dot-btn');
 
-  // --- LÓGICA DE SCROLL ---
   navBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const targetIndex = parseInt(btn.getAttribute('data-index'));
@@ -126,30 +144,20 @@ const services = [
       const scrollableDistance = section.offsetHeight - windowHeight; 
       const targetProgress = targetIndex / slides.length;
       const targetScrollY = absoluteTop + (targetProgress * scrollableDistance) + 5;
-
-      window.scrollTo({
-        top: targetScrollY,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
     });
   });
 
-  // --- ACTUALIZACIÓN VISUAL ---
   function updateScroll() {
     if (!section) return;
-
     const rect = section.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     const scrollableDistance = rect.height - windowHeight;
-    
     if (scrollableDistance <= 0) return;
-
     let progress = -rect.top / scrollableDistance;
     progress = Math.max(0, Math.min(progress, 1));
-
     const totalSlides = slides.length;
     let currentIndex = Math.floor(progress * totalSlides);
-    
     if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
 
     slides.forEach((slide, index) => {
@@ -179,14 +187,10 @@ const services = [
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (!ticking) {
-      window.requestAnimationFrame(() => {
-        updateScroll();
-        ticking = false;
-      });
+      window.requestAnimationFrame(() => { updateScroll(); ticking = false; });
       ticking = true;
     }
   });
-
   window.addEventListener('resize', updateScroll);
   updateScroll();
 </script>
