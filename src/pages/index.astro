@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import About from '../components/About.astro';
 import Services from '../components/Services.astro';
 import Certifications from '../components/Certifications.astro';
-import Gallery from '../components/Gallery.astro';
+import GaleriaInteractiva from '../components/GaleriaInteractiva.jsx'; 
 import Footer from '../components/Footer.astro';
 ---
 
@@ -71,7 +71,13 @@ import Footer from '../components/Footer.astro';
     <About />
     <Services />
     <Certifications />
-    <Gallery />
+    
+    <section id="galeria" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <GaleriaInteractiva client:visible />
+      </div>
+    </section>
+
     <Footer />
   </div>
 </Layout>
