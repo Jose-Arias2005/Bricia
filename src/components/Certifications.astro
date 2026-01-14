@@ -1,44 +1,55 @@
 ---
 import { Image } from 'astro:assets';
 
-// 1. Importamos los archivos según el orden que pediste
+// 1. Importamos los archivos
 import iconSedapal from '../icons/iconos-02.svg';
 import iconDigesa from '../icons/iconos-03.svg';
 import iconSctr from '../icons/iconos-01.svg';
 import iconFactura from '../icons/iconos-04.svg';
 
-// 2. Creamos el array de objetos asignando la variable importada
+// 2. Array de objetos
 const certificaciones = [
-  { t: "SEDAPAL", s: "Autorizado", icon: iconSedapal },       // iconos-02
-  { t: "DIGESA", s: "Registro Sanitario", icon: iconDigesa }, // iconos-03
-  { t: "SCTR", s: "Personal Asegurado", icon: iconSctr },     // iconos-01
-  { t: "FACTURACIÓN", s: "Formalidad 100%", icon: iconFactura } // iconos-04
+  { t: "SEDAPAL", s: "Autorizado", icon: iconSedapal },
+  { t: "DIGESA", s: "Registro Sanitario", icon: iconDigesa },
+  { t: "SCTR", s: "Personal Asegurado", icon: iconSctr },
+  { t: "FACTURACIÓN", s: "Formalidad 100%", icon: iconFactura }
 ];
 ---
 
-<section id="certificaciones" class="py-20 bg-[#10367D] text-white">
+<section id="certificaciones" class="py-32 bg-[#10367D] text-white">
   <div class="max-w-7xl mx-auto px-6 text-center">
     
-    <h2 class="text-3xl font-bold mb-12 flex items-center justify-center gap-4">
-      <span class="w-12 h-1 bg-[#38BDF8] rounded-full"></span>
+    <h2 class="text-5xl font-bold mb-16 flex items-center justify-center gap-4">
       Documentación y Garantía
-      <span class="w-12 h-1 bg-[#38BDF8] rounded-full"></span>
     </h2>
     
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
       {certificaciones.map(c => (
-        <div class="p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition backdrop-blur-sm flex flex-col items-center">
+        <div class="
+            group 
+            relative 
+            p-6 
+            bg-white/5 
+            border border-white/10 
+            backdrop-blur-sm 
+            hover:bg-white/10 transition-all duration-300
+            
+            rounded-full       
+            aspect-square      
+            flex flex-col items-center justify-center
+            mx-auto w-full max-w-[280px]
+        ">
           
-          <div class="mb-4">
+          <div class="mb-6 transform group-hover:scale-110 transition-transform duration-300">
             <Image 
               src={c.icon} 
               alt={`Icono de ${c.t}`} 
-              class="w-16 h-16 object-contain" 
+              class="w-20 h-20 object-contain" 
             />
           </div>
           
-          <div class="font-bold text-lg">{c.t}</div>
-          <div class="text-xs text-[#38BDF8] uppercase tracking-widest mt-1">{c.s}</div>
+          <div class="font-bold text-xl mb-1">{c.t}</div>
+          <div class="text-sm text-[#38BDF8] uppercase tracking-widest">{c.s}</div>
         </div>
       ))}
     </div>
