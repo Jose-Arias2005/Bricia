@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import About from '../components/About.astro';
 import Services from '../components/Services.astro';
 import Certifications from '../components/Certifications.astro';
+/* Asegúrate de que la ruta sea correcta según donde guardaste el archivo JSX */
 import GaleriaInteractiva from '../components/GaleriaInteractiva.jsx'; 
 import Footer from '../components/Footer.astro';
 ---
@@ -21,8 +22,8 @@ import Footer from '../components/Footer.astro';
         </span>
 
         <h1 class="text-6xl lg:text-8xl font-bold text-white leading-[0.95] mb-4 font-outfit tracking-tight">
-          AGUA <br/>
-          <span class="text-sky-400">POTABLE</span>
+          VENTA DE AGUA <br/>
+          <span class="text-sky-400">POTABLE EN LIMA</span>
         </h1>
 
         <h2 class="text-3xl md:text-[21.8px] font-bold text-[#ffc24c] mb-8 font-outfit tracking-wide">
@@ -46,7 +47,7 @@ import Footer from '../components/Footer.astro';
             <div class="absolute inset-0 bg-sky-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
             
           </a>
-          <a href="#servicios" class="px-8 py-4 border border-white/30 text-white hover:bg-white/10 font-bold rounded-lg transition-all text-center min-w-[180px]">
+          <a href="#galeria" class="px-8 py-4 border border-white/30 text-white hover:bg-white/10 font-bold rounded-lg transition-all text-center min-w-[180px]">
             VER FLOTA
           </a>
         </div>
@@ -61,7 +62,7 @@ import Footer from '../components/Footer.astro';
            [Espacio para Imagen Principal] <br/>
            <span class="text-sm font-normal opacity-70">Tamaño sugerido: 1920x1080px</span>
          </span>
-      </div>
+         </div>
 
     </div>
 
@@ -72,10 +73,8 @@ import Footer from '../components/Footer.astro';
     <Services />
     <Certifications />
     
-    <section id="galeria" class="py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-6">
-        <GaleriaInteractiva client:visible />
-      </div>
+    <section id="galeria">
+      <GaleriaInteractiva client:visible />
     </section>
 
     <Footer />

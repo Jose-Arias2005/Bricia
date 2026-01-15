@@ -17,28 +17,28 @@ const services = [
     id: "01",
     title: "Agua potable de Calidad",
     desc: "Suministro vital para consumo humano y plantas de alimentos. Cumplimos con rigurosos estándares de calidad DIGESA y SEDAPAL.",
-    icon: "💧",
+    icon: "",
     image: "/cisterna.jpg"
   },
   {
     id: "02",
     title: "Laboratorios y Empresas",
     desc: "Servicio especializado con bombeo de alta presión para clubes y residenciales. Optimizamos el tiempo cuidando su infraestructura.",
-    icon: "🏭",
+    icon: "",
     image: "/cisterna.jpg"
   },
   {
     id: "03",
     title: "Universidades y Colegios",
     desc: "Cisternas con aspersión industrial para control de polvo en obras. Solución esencial para construcción y minería.",
-    icon: "🏫",
+    icon: "",
     image: "/cisterna.jpg"
   },
   {
     id: "04",
     title: "Casas, Residencias y Piscinas",
     desc: "Unidades desde 5,000 galones. Contratos flexibles por día o mes, con conductores certificados y SCTR incluido.",
-    icon: "🏠",
+    icon: "",
     image: "/cisterna.jpg"
   }
 ];
@@ -48,7 +48,7 @@ const services = [
   
   <div class="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center pt-32">
     
-    <div class="absolute top-40 left-75 z-40 pl-10 pointer-events-none">
+    <div class="absolute top-35 left-75 z-40 pl-10 pointer-events-none">
       <span class="inline-block py-2 px-10 rounded-full bg-[#10367D] text-[#ffc24c] text-s font-bold tracking-widest uppercase mb-6 shadow-sm">
         Nuestros Servicios
       </span>
@@ -87,19 +87,16 @@ const services = [
             <div class="max-w-7xl w-full px-6 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-20 h-full">
                 
                 <div class="w-full md:w-1/2 flex flex-col justify-center items-start space-y-6 z-20">
-                    <span class="text-6xl md:text-8xl font-black text-sky-400 font-outfit select-none leading-none">
+                    <span class="text-5xl md:text-8xl font-black text-sky-400 font-outfit select-none leading-none">
                         {service.id}
                     </span>
                     <h3 class="text-4xl md:text-6xl lg:text-7xl font-bold text-[#10367D] leading-tight drop-shadow-sm">
                         {service.title}
                     </h3>
-                    <p class="text-lg md:text-xl text-slate-600 leading-relaxed font-light max-w-lg bg-white/50 p-8 rounded-2xl backdrop-blur-sm border border-white/60 shadow-lg">
+                    <p class="text-lg md:text-xl text-[#10367D] leading-relaxed max-w-lg bg-white/95 p-8 rounded-r-2xl rounded-l-md shadow-2xl border-l-[8px] border-[#ffc24c]">
                         {service.desc}
                     </p>
-                    <div class="flex items-center gap-3 text-white font-bold uppercase tracking-widest text-sm mt-4 bg-sky-400 py-4 px-8 rounded-full shadow-lg border border-sky-400 hover:scale-105 transition-transform cursor-pointer group">
-                        <span class="text-2xl group-hover:rotate-12 transition-transform">{service.icon}</span>
-                        <span>Más Información</span>
-                    </div>
+
                 </div>
 
                 <div class="w-full md:w-1/2 h-[40vh] md:h-[600px] relative group flex items-center justify-center">
